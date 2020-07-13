@@ -3,6 +3,7 @@ package com.spring.services;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,26 @@ public class EmployeeService {
 		while(itr.hasNext()) 
 			arr.add(itr.next());
 		return arr;
+	}
+	
+	public void saveEmployee(Employee newEmployee) {
+		employeeRepository.save(newEmployee);
+	}
+	
+	public void updateEmployee(Employee updateEmployee) {
+		employeeRepository.save(updateEmployee);
+	}
+	
+	public void deleteEmployee(Long employeeId) {
+		employeeRepository.deleteById(employeeId);
+	}
+	
+	public Employee getEmployeeById(Long employeeId) {
+		Optional<Employee> res = employeeRepository.findById(employeeId);
+		if(res.isPresent())
+			return res.get();
+		else
+			return null;
 	}
 	
 }
